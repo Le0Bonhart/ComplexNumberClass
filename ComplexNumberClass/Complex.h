@@ -11,9 +11,9 @@ public:
 	Complex(float a);
 	Complex(int a);
 	float GetReal();
-	float SetReal(float& value);
+	void SetReal(float& value);
 	float GetImaginary();
-	float SetImaginary(float& value);
+	void SetImaginary(float& value);
 	static Complex Add(Complex& lhs, Complex& rhs);
 	static Complex Sub(Complex& lhs, Complex& rhs);
 	static Complex Mult(Complex& lhs, Complex& rhs);
