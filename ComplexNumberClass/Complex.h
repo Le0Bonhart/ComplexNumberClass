@@ -7,6 +7,9 @@ private:
 	float _real;
 	float _imaginary;
 public:
+	Complex(float a, float b);
+	Complex(float a);
+	Complex(int a);
 	float GetReal();
 	float SetReal(float& value);
 	float GetImaginary();
@@ -22,4 +25,6 @@ public:
 	Complex operator * (Complex& rhs);
 	Complex operator / (Complex& rhs);
 	Complex operator ^ (float& rhs);
+	Complex operator == (float& rhs);
+	Complex operator == (int& rhs);
 };
