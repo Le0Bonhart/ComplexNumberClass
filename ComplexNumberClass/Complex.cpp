@@ -1,6 +1,6 @@
 #include "Complex.h"
 
-Complex::Complex(float a, float b, bool polar_form = false) 
+Complex::Complex(float a, float b, bool polar_form) 
 {
 	if (polar_form)
 	{
@@ -125,3 +125,5 @@ ostream& operator << (ostream& ofstr, Complex comp)
 {
 	return ofstr << comp.GetReal() << " + i*" << comp.GetImaginary();
 }
+
+int main() {return 0;}
