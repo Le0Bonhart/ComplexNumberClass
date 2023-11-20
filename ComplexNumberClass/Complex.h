@@ -3,9 +3,10 @@
 class Complex
 {
 private:
-	float _re;
-	float _im;
+	float _re = 0;
+	float _im = 0;
 public:
+	Complex();
 	Complex(float a, float b, bool polar_form = false); //при polar_form == true первый аргумет - модуль, а второй - угол 
 	Complex(float a);
 	Complex(int a);
@@ -28,4 +29,7 @@ public:
 	bool operator == (Complex& rhs);
 	bool operator == (float rhs);
 	bool operator == (int rhs);
+	bool operator != (Complex& rhs);
+	bool operator != (float rhs);
+	bool operator != (int rhs);
 };

@@ -4,11 +4,20 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+#define Accuracy 0.0001f
+
 namespace ComplexTests
 {
 	TEST_CLASS(ComplexTests)
 	{
 	public:
+		TEST_METHOD(ConstructorDefault)
+		{
+			Complex c = Complex();
+			Assert::IsTrue(c.GetReal() == 0);
+			Assert::IsTrue(c.GetImaginary() == 0);
+		}
+
 		TEST_METHOD(Constructor)
 		{
 			Complex c = Complex(10, 5);
@@ -19,8 +28,8 @@ namespace ComplexTests
 		TEST_METHOD(ConstructorPolar)
 		{
 			Complex c = Complex(2, 3 * acos(-1)/4, true);
-			Assert::IsTrue(c.GetReal() + sqrt(2) < 0.0001f);
-			Assert::IsTrue(c.GetImaginary() - sqrt(2) < 0.0001f);
+			Assert::IsTrue(c.GetReal() + sqrt(2) < Accuracy);
+			Assert::IsTrue(c.GetImaginary() - sqrt(2) < Accuracy);
 		}
 		
 		TEST_METHOD(FromFloat)
@@ -89,7 +98,7 @@ namespace ComplexTests
 
 			auto actual = c1 + c2;
 
-			Assert::IsTrue((expected - actual).Abs() < 0.0001f);
+			Assert::IsTrue((expected - actual).Abs() < Accuracy);
 		}
 
 		TEST_METHOD(Sub)
@@ -100,7 +109,7 @@ namespace ComplexTests
 
 			auto actual = c1 - c2;
 
-			Assert::IsTrue((expected - actual).Abs() < 0.0001f);
+			Assert::IsTrue((expected - actual).Abs() < Accuracy);
 		}
 
 		TEST_METHOD(Mult)
@@ -112,7 +121,7 @@ namespace ComplexTests
 			auto actual = c1 * c2;
 
 
-			Assert::IsTrue((expected - actual).Abs() < 0.0001f);
+			Assert::IsTrue((expected - actual).Abs() < Accuracy);
 		}
 
 		TEST_METHOD(Div)
@@ -123,7 +132,7 @@ namespace ComplexTests
 
 			auto actual = c1 / c2;
 
-			Assert::IsTrue((expected - actual).Abs() < 0.0001f);
+			Assert::IsTrue((expected - actual).Abs() < Accuracy);
 		}
 
 		TEST_METHOD(Pow)
@@ -135,20 +144,20 @@ namespace ComplexTests
 
 			auto actual = c ^ pow;
 			
-			Assert::IsTrue((expected - actual).Abs() < 0.0001f);
+			Assert::IsTrue((expected - actual).Abs() < Accuracy);
 		}
 
 		TEST_METHOD(Abs)
 		{
 			Complex a = Complex(-4.0, 3.0);
 			auto res = a.Abs();
-			Assert::IsTrue(res - 5 < 0.0001f);
+			Assert::IsTrue(res - 5 < Accuracy);
 		}
 
 		TEST_METHOD(Arg)
 		{
 			Complex c = Complex(12, 4, true);
-			Assert::IsTrue(c.Arg() - 4 < 0.0001);
+			Assert::IsTrue(c.Arg() - 4 < Accuracy);
 		}
 
 		TEST_METHOD(EqualComplex)

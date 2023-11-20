@@ -2,7 +2,11 @@
 #include <iostream>
 #include <cmath>
 
-Complex::Complex(float a, float b, bool polar_form) 
+#define Accuracy 0.0001f
+
+Complex::Complex() : _re(0), _im(0) {}
+
+Complex::Complex(float a, float b, bool polar_form):_re(0), _im(0)
 {
 	if (polar_form)
 	{
@@ -16,17 +20,9 @@ Complex::Complex(float a, float b, bool polar_form)
 	}
 }
 
-Complex::Complex(float a)
-{
-	_re = a;
-	_im = 0;
-}
+Complex::Complex(float a) :_re(a), _im(0) {}
 
-Complex::Complex(int a)
-{
-	_re = (float)a;
-	_im = 0;
-}
+Complex::Complex(int a) :_re((float)a), _im(0) {}
 
 float Complex::GetReal()
 {
@@ -65,6 +61,7 @@ Complex Complex::Mult(Complex& lhs, Complex& rhs)
 
 Complex Complex::Div(Complex& lhs, Complex& rhs)
 {
+	if (rhs.Abs() == 0) throw "Zero Division";
 	return Complex(lhs.Abs()/rhs.Abs(), lhs.Arg() - rhs.Arg(), true);
 }
 
@@ -112,22 +109,35 @@ Complex Complex::operator^(float rhs)
 
 bool Complex::operator==(Complex& rhs)
 {
-	return ((_re - rhs._re < 0.0001f) && (_im - rhs._im < 0.0001f));
+	return ((_re - rhs._re < Accuracy) && (_im - rhs._im < Accuracy));
 }
 
 bool Complex::operator==(float rhs)
 {
-	return ((_im < 0.0001f) && (_re - rhs < 0.0001f));
+	return ((_im < Accuracy) && (_re - rhs < Accuracy));
 }
 
 bool Complex::operator==(int rhs)
 {
-	return ((_im < 0.0001f) && (_re - rhs) < 0.0001f);
+	return ((_im < Accuracy) && (_re - rhs) < Accuracy);
+}
+
+bool Complex::operator==(Complex& rhs)
+{
+	return !(*this == rhs);
+}
+
+bool Complex::operator==(float rhs)
+{
+	return !(*this == rhs);
+}
+
+bool Complex::operator==(int rhs)
+{
+	return !(*this == rhs);
 }
 
 std::ostream& operator << (std::ostream& ofstr, Complex comp)
 {
 	return ofstr << comp.GetReal() << " + i*" << comp.GetImaginary();
 }
-
-int main() {return 0;}
