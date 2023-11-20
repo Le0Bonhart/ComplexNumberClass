@@ -122,17 +122,17 @@ bool Complex::operator==(int rhs)
 	return ((_im < Accuracy) && (_re - rhs) < Accuracy);
 }
 
-bool Complex::operator==(Complex& rhs)
+bool Complex::operator!=(Complex& rhs)
 {
 	return !(*this == rhs);
 }
 
-bool Complex::operator==(float rhs)
+bool Complex::operator!=(float rhs)
 {
 	return !(*this == rhs);
 }
 
-bool Complex::operator==(int rhs)
+bool Complex::operator!=(int rhs)
 {
 	return !(*this == rhs);
 }
