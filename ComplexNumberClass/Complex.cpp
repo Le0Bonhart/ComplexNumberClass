@@ -24,6 +24,14 @@ Complex::Complex(float a) :_re(a), _im(0) {}
 
 Complex::Complex(int a) :_re((float)a), _im(0) {}
 
+Complex::Complex(long long packed)
+{
+	PackUnion pack;
+	pack._packed = packed;
+	_re = pack._data._re;
+	_im = pack._data._im;
+}
+
 float Complex::GetReal()
 {
 	return _re;
@@ -42,6 +50,21 @@ float Complex::GetImaginary()
 void Complex::SetImaginary(float value)
 {
 	_im = value;
+}
+
+void Complex::Unpack(long long packed)
+{
+	PackUnion pack;
+	pack._packed = packed;
+	_re = pack._data._re;
+	_im = pack._data._im;
+}
+
+long long Complex::Pack()
+{
+	PackUnion pack;
+	pack._data = {_re, _im};
+	return pack._packed;
 }
 
 Complex Complex::Add(const Complex& lhs, const Complex& rhs)

@@ -186,5 +186,22 @@ namespace ComplexTests
 			a.SetImaginary(1);
 			Assert::IsFalse(a == b);
 		}
+
+		TEST_METHOD(PacConstructorTest)
+		{
+			Complex a = Complex(1.33f, -14.421f);
+			long long a_pack = a.Pack();
+			Complex b = Complex(a_pack);
+			Assert::IsTrue(a == b);
+		}
+
+		TEST_METHOD(PacUnpackTest)
+		{
+			Complex a = Complex(1.33f, -14.421f);
+			long long a_pack = a.Pack();
+			Complex b;
+			b.Unpack(a_pack);
+			Assert::IsTrue(a == b);
+		}
 	};
 }
